@@ -28,8 +28,41 @@ class RobotPaths {
   }
 
   solve() {
-    // Your code here.
+    const output = 0;
+    const boardSize = this.board.board.length;
+
+    function movement(rows, columns) {
+      if (rows === boardSize - 1 && columns === boardSize - 1) {
+        output += 1;
+        return;
+      }
+      if (
+        rows < 0 ||
+        rows >= boardSize ||
+        columns < 0 ||
+        columns >= boardSize
+      ) {
+        return;
+      }
+      if (this.board.hasBeenVisited(rows, columns)) {
+        return;
+      } else {
+        this.board.togglePiece(rows, columns);
+        movement(rows - 1, columns);
+        movement(rows, columns - 1);
+        movement(rows + 1, columns);
+        movement(rows, columns + 1);
+        this.board.togglePiece(rows, columns);
+      }
+    }
+
+    movement(this.row, this.col);
+    return output;
   }
 }
+
+const ourRobot = new RobotPaths(2);
+console.log(ourRobot.solve());
+console.log(ourRobot.board);
 
 module.exports = { RobotPaths };

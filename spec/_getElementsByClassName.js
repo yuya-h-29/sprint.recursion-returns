@@ -28,7 +28,7 @@ describe("getElementsByClassName", () => {
     $("body").removeClass("targetClassName");
   });
 
-  it.only("should not use the native method", () => {
+  it("should not use the native method", () => {
     const nativeSpy = spy(document, "getElementsByClassName");
 
     try {
@@ -47,7 +47,7 @@ describe("getElementsByClassName", () => {
   }
 
   function testHTMLStrings(htmlString, index) {
-    it.only(`should match the results of calling the getElementsByClassName method, htmlStrings index: ${index}`, () => {
+    it(`should match the results of calling the getElementsByClassName method, htmlStrings index: ${index}`, () => {
       const $rootElement = $(htmlString);
       $("body").append($rootElement);
       const result = getElementsByClassName("targetClassName");
