@@ -28,10 +28,12 @@ class RobotPaths {
   }
 
   solve() {
-    const output = 0;
-    const boardSize = this.board.board.length;
+    let output = 0;
+    const entireBoard = this.board.board;
+    const boardSize = entireBoard.length;
+    // console.log("aaaaa", this.board.hasBeenVisited(0, 0));
 
-    function movement(rows, columns) {
+    const movement = (rows, columns) => {
       if (rows === boardSize - 1 && columns === boardSize - 1) {
         output += 1;
         return;
@@ -44,7 +46,7 @@ class RobotPaths {
       ) {
         return;
       }
-      if (this.board.hasBeenVisited(rows, columns)) {
+      if (this.board.hasBeenVisited(rows, columns) === true) {
         return;
       } else {
         this.board.togglePiece(rows, columns);
@@ -54,15 +56,15 @@ class RobotPaths {
         movement(rows, columns + 1);
         this.board.togglePiece(rows, columns);
       }
-    }
+    };
 
     movement(this.row, this.col);
     return output;
   }
 }
 
-const ourRobot = new RobotPaths(2);
-console.log(ourRobot.solve());
-console.log(ourRobot.board);
+// const ourRobot = new RobotPaths(2);
+// console.log(ourRobot.solve());
+// console.log(ourRobot.board);
 
 module.exports = { RobotPaths };
